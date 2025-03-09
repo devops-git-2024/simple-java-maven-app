@@ -3,7 +3,7 @@ pipeline {
     agent any
     
     stages {
-        stage('code checkout') {
+        stage('build') {
             steps {
                 sh 'mvn clean package'
             }
