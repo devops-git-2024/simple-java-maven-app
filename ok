@@ -23,6 +23,14 @@ pipeline {
                 }
             }
         }
-        
+        stage('Deployment') {
+            steps {
+                sh 'java -jar /var/lib/jenkins/workspace/Pipeline Project/target/*.jar'
+            }
+        }
     }
 }
+
+
+
+        
