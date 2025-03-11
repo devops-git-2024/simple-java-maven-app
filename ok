@@ -23,6 +23,15 @@ pipeline {
                 }
             }
         }
+
+         stage('Build docker image') {
+            steps {
+                sh '''
+                    docker build -t java .
+                '''    
+            }
+        }
+
         stage('Deployment') {
             steps {
                 sh 'java -jar /var/lib/jenkins/workspace/Pipeline-new/target/*.jar'
