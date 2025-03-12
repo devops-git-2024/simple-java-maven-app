@@ -7,6 +7,10 @@ pipeline {
         
     }
 
+    environment{
+        DOCKER_USER="proindia"
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -36,13 +40,10 @@ pipeline {
             steps {
        
                withCredentials([gitUsernamePassword(credentialsId: 'DockerHub', gitToolName: 'Default')]) {
-               
-                docker push proindia/java_project
-             }
-
-                sh '''
-                   docker push proindia/java_project 
-                '''
+                    sh 'docker login -u ${DOCKER_USER} -p ${DockerHub}'
+                sh 'docker push proindia/java_project:latest'
+                sh ' docker logout'
+                }
             }
         }
 
