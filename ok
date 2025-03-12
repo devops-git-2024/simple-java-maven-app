@@ -24,12 +24,20 @@ pipeline {
             }
         }
 
-         stage('Build docker image') {
+        stage('Build docker image') {
             steps {
                 sh '''
-                    docker rmi java
-                    docker build -t java .
+                    // docker rmi java
+                    docker build -t proindia/java-project.
                 '''    
+            }
+        }
+
+        stage('push docker image to dockerhub repo') {
+            steps {
+                sh '''
+                   docker push proindia/java-project 
+                '''
             }
         }
 
