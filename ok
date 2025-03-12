@@ -27,7 +27,7 @@ pipeline {
         stage('Build docker image') {
             steps {
                 sh ''' 
-                    docker build -t proindia/java-project.
+                    docker build -t proindia/java_project .
                 '''    
             }
         }
@@ -35,7 +35,7 @@ pipeline {
         stage('push docker image to dockerhub repo') {
             steps {
                 sh '''
-                   docker push proindia/java-project 
+                   docker push proindia/java_project 
                 '''
             }
         }
