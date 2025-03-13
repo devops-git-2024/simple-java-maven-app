@@ -31,6 +31,7 @@ pipeline {
         stage('Build docker image') {
             steps {
                 sh ''' 
+                    docker rmi proindia/java_project
                     docker build -t proindia/java_project .
                 '''    
             }
@@ -47,11 +48,17 @@ pipeline {
             }
         }
 
-        stage('Deployment') {
+        stage('Deployment on docker container') {
             steps {
-                sh 'java -jar /var/lib/jenkins/workspace/Pipeline-new/target/*.jar'
+                sh 'docker run -itd --name java proindia/java_project:latest /bin/sh'
             }
         }
+
+        // stage('Deployment') {
+        //     steps {
+        //         sh 'java -jar /var/lib/jenkins/workspace/Pipeline-new/target/*.jar'
+        //     }
+        // }
     }
 }
 
